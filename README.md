@@ -1,23 +1,19 @@
-# OpenList文件列表 (123解禁版)
+# OpenList文件列表 (123解限版)
+[![license](https://img.shields.io/github/license/Genius-Society/rogsoft_openlist.svg)](./LICENSE)
+[![sf](https://img.shields.io/badge/release-SourceForge-ff6600.svg)](https://sourceforge.net/projects/rogsoft-openlist/files)
 
-## 是什么？
-`一个支持多种存储，支持网页浏览和 WebDAV 的文件列表程序，由 gin 和 Solidjs 驱动。`
+一个支持多种存储, 支持网页浏览和 WebDAV 的文件列表程序, 由 gin 和 Solidjs 驱动
 
 ## 项目地址
-https://github.com/Yxiguan/OpenList_123
+<https://github.com/Yxiguan/OpenList_123>
 
-## 官方信息  
-
-[官方TG交流群](https://t.me/OpenListTeam) `插件正常启动后的使用问题请查看文档或去官方TG交流群寻求帮助`
-
-文档 https://www.oplist.org
-
----
+## 官方信息
+插件正常启动后的使用问题请查看[文档](https://www.oplist.org)或去[官方TG交流群](https://t.me/OpenListTeam)寻求帮助
 
 ## 机型支持
-在asuswrt为基础的固件上，OpenList插件目前仅支持aarch64架构的路由器，具体如下：
-- 部分及其未列出，请根据CPU型号和支持软件中心与否自行判断
-- 使用OpenList建议配置1G及以上的虚拟内存，特别是小内存的路由器
+在 asuswrt 为基础的固件上, OpenList 插件目前仅支持 aarch64 架构的路由器, 具体如下：
+- 部分及其未列出, 请根据 CPU 型号和支持软件中心与否自行判断
+- 使用 OpenList 建议配置 1G 及以上的虚拟内存, 特别是小内存的路由器
 
 | 机型             | 内存  | CPU/SOC | 架构  | 核心 | 频率    |
 | ---------------- | ----- | ------- | ----- | ---- | ------- |
@@ -50,3 +46,4 @@ https://github.com/Yxiguan/OpenList_123
 
 ## 致谢
 - <https://github.com/everstu/Koolcenter_openlist>
+- <https://github.com/Yxiguan/OpenList_123/releases/download/v4.1.2/openlist-linux-musl-arm64.tar.gz>

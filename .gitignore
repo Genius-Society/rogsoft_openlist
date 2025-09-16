@@ -1,2 +1,4 @@
 .idea
 *.tar.gz
+test.*
+*__pycache__*

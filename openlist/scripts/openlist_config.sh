@@ -100,12 +100,12 @@ check_usb2jffs_used_status() {
 }
 # 获取或生成JWT密钥
 get_jwt_secret() {
-	local jwt_secret=$(dbus get openlist_jwt_secret)
-	if [ -z "${jwt_secret}" ]; then
-		jwt_secret=$(openssl rand -hex 8)
-		dbus set openlist_jwt_secret=${jwt_secret}
-	fi
-	echo $jwt_secret
+  local jwt_secret=$(dbus get openlist_jwt_secret)
+  if [ -z "${jwt_secret}" ]; then
+    jwt_secret=$(openssl rand -hex 8)
+    dbus set openlist_jwt_secret=${jwt_secret}
+  fi
+  echo $jwt_secret
 }
 
 write_backup_job() {
@@ -348,7 +348,7 @@ makeConfig() {
             echo_date "⚠️你需要关闭 OpenList 的https，不然将导致无法访问面板！"
             #echo_date "⚠️本次插件启动不会将此网站URL写入配置，下次请更正，继续..."
             #dbus set openlist_url_error=1
-          #else
+            #else
             #configSiteUrl=${openlist_site_url}
           fi
         else
@@ -377,7 +377,7 @@ makeConfig() {
               echo_date "⚠️你需要为网站URL配置端口:${rightPort}，不然会导致面 OpenList 部分功能出现问题！"
               #echo_date "⚠️本次插件启动不会将此网站URL写入配置，下次请更正，继续..."
               #dbus set openlist_url_error=1
-            #else
+              #else
               #configSiteUrl=${openlist_site_url}
             fi
           fi
@@ -405,9 +405,9 @@ makeConfig() {
   else
     BINDADDR="0.0.0.0"
   fi
-	local JWT_SECRET=$(get_jwt_secret)
+  local JWT_SECRET=$(get_jwt_secret)
 
-	# 生成配置文件
+  # 生成配置文件
   config='{
 "force":false,
 "jwt_secret":"'${JWT_SECRET}'",
@@ -459,10 +459,10 @@ check_enable_plugin() {
   echo_date "➡️"$(dbus listall | grep 'enable=1' | awk -F '_' '!a[$1]++' | awk -F '_' '{print "dbus get softcenter_module_"$1"_title"|"sh"}' | tr '\n' ',' | sed 's/,$/ /')
 }
 
-make_random_password(){
-    /koolshare/bin/openlist --data ${OpenListBaseDir} admin random >${OpenListBaseDir}/admin.account 2>&1
-    ADMIN_USER=$(cat ${OpenListBaseDir}/admin.account | grep "username:" | awk '{print $NF}')
-    ADMIN_PASS=$(cat ${OpenListBaseDir}/admin.account | grep "password:" | awk '{print $NF}')
+make_random_password() {
+  /koolshare/bin/openlist --data ${OpenListBaseDir} admin random >${OpenListBaseDir}/admin.account 2>&1
+  ADMIN_USER=$(cat ${OpenListBaseDir}/admin.account | grep "username:" | awk '{print $NF}')
+  ADMIN_PASS=$(cat ${OpenListBaseDir}/admin.account | grep "password:" | awk '{print $NF}')
 }
 
 #检查内存是否合规
@@ -599,8 +599,8 @@ stop_process() {
     rm -rf /koolshare/perp/openlist
     killall openlist >/dev/null 2>&1
     kill -9 "${OPENLIST_PID}" >/dev/null 2>&1
-  	# remove log
-  	rm -rf "$OPENLIST_RUN_LOG"
+    # remove log
+    rm -rf "$OPENLIST_RUN_LOG"
   fi
 }
 
@@ -641,7 +641,7 @@ open_port() {
     fi
   fi
   # 开启IPV6防火墙端口
-  local v6tables=$(which ip6tables);
+  local v6tables=$(which ip6tables)
   local MATCH6=$(ip6tables -t filter -S INPUT | grep "openlist_rule")
   if [ -z "${MATCH6}" ] && [ -n "${v6tables}" ]; then
     if [ "${configDisableHttp}" != "true" -a "${openlist_open_http_port}" == "1" ]; then
@@ -663,7 +663,7 @@ close_port() {
     sh /tmp/openlist_clean.sh >/dev/null 2>&1
     rm /tmp/openlist_clean.sh
   fi
-  local v6tables=$(which ip6tables);
+  local v6tables=$(which ip6tables)
   local IPTS6=$(ip6tables -t filter -S | grep -w "openlist_rule" | sed 's/-A/ip6tables -t filter -D/g')
   if [ -n "${IPTS6}" ] && [ -n "${v6tables}" ]; then
     ip6tables -t filter -S | grep -w "openlist_rule" | sed 's/-A/ip6tables -t filter -D/g' >/tmp/openlist_clean.sh
@@ -713,10 +713,10 @@ random_password() {
   fi
   #2. 关闭server进程
   echo_date "重启 OpenList 进程..."
-  stop_process > /dev/null 2>&1
+  stop_process >/dev/null 2>&1
 
   # 3. 重启进程
-  start > /dev/null 2>&1
+  start >/dev/null 2>&1
   echo_date "✅重启成功！"
 }
 

@@ -4,6 +4,10 @@
 
 一个支持多种存储, 支持网页浏览和 WebDAV 的文件列表程序, 由 gin 和 Solidjs 驱动
 
+<a href="https://github.com/Genius-Society/rogsoft_openlist" target="_blank">
+    <img src="./openlist/res/icon-openlist.png" style="width: 160px;">
+</a>
+
 ## 项目地址
 <https://github.com/Yxiguan/OpenList_123>
 
@@ -43,6 +47,24 @@
 | ZenWiFi_XD4      | 256MB | BCM6755 | armv7 | 4    | 1.5 GHz |
 | TUF-AX3000_V2    | 512MB | BCM6756 | armv7 | 4    | 1.7GHz  |
 | RT-AX57          | 256MB | BCM6756 | armv7 | 4    | 1.7GHz  |
+
+## 代码下载
+```bash
+git clone git@github.com:Genius-Society/rogsoft_openlist.git
+cd rogsoft_openlist
+```
+
+## 环境
+```bash
+conda create -n py311 python=3.11 -y
+conda activate py311
+```
+
+## Windows 上打包
+```bash
+# 将 git bash 和 7z 的环境变量要配置好重启
+python build.py
+```
 
 ## 致谢
 - <https://github.com/everstu/Koolcenter_openlist>

@@ -1,15 +1,12 @@
-# OpenList文件列表 (123解限版)
+# KoolCenter 插件 - OpenList文件列表 (123解限版)
 [![license](https://img.shields.io/github/license/Genius-Society/rogsoft_openlist.svg)](./LICENSE)
 [![sf](https://img.shields.io/badge/release-SourceForge-ff6600.svg)](https://sourceforge.net/projects/rogsoft-openlist/files)
 
-一个支持多种存储, 支持网页浏览和 WebDAV 的文件列表程序, 由 gin 和 Solidjs 驱动
+一个支持多种存储, 支持网页浏览和 WebDAV 的文件列表程序, 由 gin 和 Solidjs 驱动, 当前项目为其解限 pan123 下载 1G 流量限制的 KoolCenter 插件版本
 
 <a href="https://github.com/Genius-Society/rogsoft_openlist" target="_blank">
     <img src="./openlist/res/icon-openlist.png" style="width: 160px;">
 </a>
-
-## 项目地址
-<https://github.com/Yxiguan/OpenList_123>
 
 ## 官方信息
 插件正常启动后的使用问题请查看[文档](https://www.oplist.org)或去[官方TG交流群](https://t.me/OpenListTeam)寻求帮助
@@ -67,5 +64,5 @@ python build.py
 ```
 
 ## 致谢
+- <https://github.com/Yxiguan/OpenList_123>
 - <https://github.com/everstu/Koolcenter_openlist>
-- <https://github.com/Yxiguan/OpenList_123/releases/download/v4.1.2/openlist-linux-musl-arm64.tar.gz>

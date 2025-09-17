@@ -19,6 +19,15 @@ def latest_release(repo):
     return ver[1:], f"https://github.com/{repo}/releases/download/{ver}"
 
 
+def remote_md5(url: str):
+    txt = urllib.request.urlopen(f"{url}/md5-linux-musl-arm.txt").read().decode()
+    return re.search(
+        r"^([a-f0-9]{32})\s+./openlist-linux-musl-arm64\.tar\.gz$",
+        txt,
+        re.M,
+    ).group(1)
+
+
 def local_md5(fpath: str):
     h = hashlib.md5()
     with Path(fpath).open("rb") as f:
@@ -28,25 +37,12 @@ def local_md5(fpath: str):
     return h.hexdigest()
 
 
-def extract(fpath: str, extracto: str):
-    extract_dir = Path(extracto)
-    extract_dir.mkdir(exist_ok=True)
-    with tarfile.open(Path(fpath), "r:gz") as tar:
-        tar.extractall(extract_dir)
+def verify(dld_path: str, dld_md5: str):
+    print("校验 MD5 ...")
+    if local_md5(dld_path) != dld_md5:
+        raise RuntimeError("MD5 校验失败，文件可能被篡改")
 
-    print(f"解压完成，文件位于 {extract_dir.absolute()}")
-
-
-def crlf2lf():
-    print("CRLF 转 LF")
-    subprocess.run(
-        [
-            "bash",
-            "-c",
-            "find './' -type f -name '*.sh' -exec sed -i 's/\r$//' {} \;",
-        ],
-        check=True,
-    )
+    print("MD5 校验通过")
 
 
 def download(url: str, dld_to: str, dld_md5: str):
@@ -69,12 +65,25 @@ def download(url: str, dld_to: str, dld_md5: str):
     return dld_to
 
 
-def verify(dld_path: str, dld_md5: str):
-    print("校验 MD5 ...")
-    if local_md5(dld_path) != dld_md5:
-        raise RuntimeError("MD5 校验失败，文件可能被篡改")
+def extract(fpath: str, extracto: str):
+    extract_dir = Path(extracto)
+    extract_dir.mkdir(exist_ok=True)
+    with tarfile.open(Path(fpath), "r:gz") as tar:
+        tar.extractall(extract_dir)
 
-    print("MD5 校验通过")
+    print(f"解压完成，文件位于 {extract_dir.absolute()}")
+
+
+def rm_cr():
+    print("CRLF 转 LF")
+    subprocess.run(
+        [
+            "bash",
+            "-c",
+            "find './' -type f -name '*.sh' -exec sed -i 's/\r$//' {} \;",
+        ],
+        check=True,
+    )
 
 
 def pack(module_name: str):
@@ -92,27 +101,16 @@ def pack(module_name: str):
     return f"./{output}"
 
 
-def remote_md5(url: str):
-    txt = urllib.request.urlopen(f"{url}/md5-linux-musl-arm.txt").read().decode()
-    return re.search(
-        r"^([a-f0-9]{32})\s+./openlist-linux-musl-arm64\.tar\.gz$",
-        txt,
-        re.M,
-    ).group(1)
-
-
 def release(proj_name="openlist"):
     try:
         ver, url = latest_release("Yxiguan/OpenList_123")
-        if ver == open(f"./{proj_name}/version", "r", encoding="utf-8").read():
-            print("bin 源版本无更新, 直接打包!")
-        else:
-            print("发现 bin 源版本更新!")
-            md5 = remote_md5(url)
-            tar = download(url, f"./__pycache__/{md5}.tar.gz", md5)
-            extract(tar, f"./{proj_name}/bin")
+        md5 = remote_md5(url)
+        tar = download(url, f"./__pycache__/{md5}.tar.gz", md5)
+        extract(tar, f"./{proj_name}/bin")
+        with open(f"./{proj_name}/version", "w", encoding="utf-8") as f:
+            f.write(ver)
 
-        crlf2lf()
+        rm_cr()
         pack(proj_name)
 
     except Exception as e:

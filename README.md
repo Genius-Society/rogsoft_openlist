@@ -9,7 +9,7 @@
 </a>
 
 ## 官方信息
-插件正常启动后的使用问题请查看[文档](https://www.oplist.org)或去[官方TG交流群](https://t.me/OpenListTeam)寻求帮助
+插件正常启动后的使用问题请查看 [文档](https://www.oplist.org) 或去 [官方TG交流群](https://t.me/OpenListTeam) 寻求帮助
 
 ## 依赖项
 在 KoolCenter 软件中心安装并挂载如下前置插件, 安装顺序自上而下:
@@ -64,7 +64,7 @@ conda activate py311
 
 ## Windows 上打包
 ```bash
-# 将 git bash 和 7z 的环境变量要配置好重启
+# 要先将 git bash 和 7z 的环境变量配置好重启
 python build.py
 ```
 

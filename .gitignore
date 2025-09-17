@@ -2,3 +2,4 @@
 *.tar.gz
 test.*
 *__pycache__*
+openlist/bin/*

@@ -11,6 +11,11 @@
 ## 官方信息
 插件正常启动后的使用问题请查看[文档](https://www.oplist.org)或去[官方TG交流群](https://t.me/OpenListTeam)寻求帮助
 
+## 依赖项
+在 KoolCenter 软件中心安装并挂载如下前置插件, 安装顺序自上而下:
+- USB2JFFS
+- 虚拟内存
+
 ## 机型支持
 在 asuswrt 为基础的固件上, OpenList 插件目前仅支持 aarch64 架构的路由器, 具体如下：
 - 部分及其未列出, 请根据 CPU 型号和支持软件中心与否自行判断

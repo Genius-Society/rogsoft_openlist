@@ -38,7 +38,7 @@ def local_md5(fpath: str):
 
 
 def verify(dld_path: str, dld_md5: str):
-    print("校验 MD5 ...")
+    print("\n校验 MD5 ...")
     if local_md5(dld_path) != dld_md5:
         raise RuntimeError("MD5 校验失败，文件可能被篡改")
 

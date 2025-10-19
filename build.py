@@ -52,6 +52,7 @@ def download(url: str, dld_to: str, dld_md5: str):
         return dld_to
 
     print("正在下载 ...")
+    os.makedirs(os.path.dirname(dld_to), exist_ok=True)
     urllib.request.urlretrieve(
         f"{url}/openlist-linux-musl-arm64.tar.gz",
         dld_file,

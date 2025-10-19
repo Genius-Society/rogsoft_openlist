@@ -102,9 +102,9 @@ def pack(module_name: str):
     return f"./{output}"
 
 
-def release(proj_name="openlist"):
+def release(proj_name="openlist", repo_name="Yxiguan/OpenList_123"):
     try:
-        ver, url = latest_release("Yxiguan/OpenList_123")
+        ver, url = latest_release(repo_name)
         md5 = remote_md5(url)
         tar = download(url, f"./__pycache__/{md5}.tar.gz", md5)
         extract(tar, f"./{proj_name}/bin")
@@ -115,7 +115,7 @@ def release(proj_name="openlist"):
         pack(proj_name)
 
     except Exception as e:
-        print(f"打包出错: {e}")
+        print(f"发布出错: {e}")
 
 
 if __name__ == "__main__":

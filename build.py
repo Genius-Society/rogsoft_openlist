@@ -20,7 +20,7 @@ def latest_release(repo):
 
 
 def remote_md5(url: str):
-    txt = urllib.request.urlopen(f"{url}/md5-linux-musl-arm.txt").read().decode()
+    txt = urllib.request.urlopen(f"{url}/md5-linux-musl.txt").read().decode()
     return re.search(
         r"^([a-f0-9]{32})\s+./openlist-linux-musl-arm64\.tar\.gz$",
         txt,

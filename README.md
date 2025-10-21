@@ -38,7 +38,7 @@
 | GT-AX6000        | 1GB   | BCM4912 | armv8 | 4    | 2.0GHz  |
 | GT-AX11000_PRO   | 1GB   | BCM4912 | armv8 | 4    | 2.0GHz  |
 | RT-AX86U_PRO     | 1GB   | BCM4912 | armv8 | 4    | 2.0GHz  |
-| RAX50            | 512MB | BCM6750 | armv7 | 3    | 1.5 GHz |
+<!-- | RAX50            | 512MB | BCM6750 | armv7 | 3    | 1.5 GHz |
 | RAX70            | 512MB | BCM6755 | armv7 | 4    | 1.5 GHz |
 | RT-AX56U         | 512MB | BCM6755 | armv7 | 4    | 1.5 GHz |
 | RT-AX56U_V2      | 256MB | BCM6755 | armv7 | 4    | 1.5 GHz |
@@ -49,7 +49,7 @@
 | ZenWiFi_XT8      | 512MB | BCM6755 | armv7 | 4    | 1.5 GHz |
 | ZenWiFi_XD4      | 256MB | BCM6755 | armv7 | 4    | 1.5 GHz |
 | TUF-AX3000_V2    | 512MB | BCM6756 | armv7 | 4    | 1.7GHz  |
-| RT-AX57          | 256MB | BCM6756 | armv7 | 4    | 1.7GHz  |
+| RT-AX57          | 256MB | BCM6756 | armv7 | 4    | 1.7GHz  | -->
 
 ## 代码下载
 ```bash
@@ -71,4 +71,5 @@ python build.py
 
 ## 致谢
 - <https://github.com/Yxiguan/OpenList_123>
+- <https://github.com/OpenListTeam/OpenList>
 - <https://github.com/everstu/Koolcenter_openlist>

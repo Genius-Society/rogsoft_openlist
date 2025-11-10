@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import time
 import hashlib
 import tarfile
 import subprocess
@@ -19,10 +20,10 @@ def latest_release(repo):
     return ver[1:], f"https://github.com/{repo}/releases/download/{ver}"
 
 
-def remote_md5(url: str):
-    txt = urllib.request.urlopen(f"{url}/md5-linux-musl.txt").read().decode()
+def remote_md5(url: str, md5_txt: str, tar_name: str):
+    txt = urllib.request.urlopen(f"{url}/{md5_txt}").read().decode()
     return re.search(
-        r"^([a-f0-9]{32})\s+./openlist-linux-musl-arm64\.tar\.gz$",
+        rf"^([a-f0-9]{{32}})\s+./{tar_name}\.tar\.gz$",
         txt,
         re.M,
     ).group(1)
@@ -45,7 +46,7 @@ def verify(dld_path: str, dld_md5: str):
     print("MD5 校验通过")
 
 
-def download(url: str, dld_to: str, dld_md5: str):
+def download(url: str, dld_to: str, dld_md5: str, tar_name: str):
     dld_file = Path(dld_to)
     if dld_file.exists() and local_md5(dld_file) == dld_md5:
         print("本地文件已存在且校验通过，跳过下载")
@@ -54,7 +55,7 @@ def download(url: str, dld_to: str, dld_md5: str):
     print("正在下载 ...")
     os.makedirs(os.path.dirname(dld_to), exist_ok=True)
     urllib.request.urlretrieve(
-        f"{url}/openlist-linux-musl-arm64.tar.gz",
+        f"{url}/{tar_name}.tar.gz",
         dld_file,
         reporthook=lambda b, bsize, tsize: print(
             f"\r{b * bsize / 1024 / 1024:.1f} MB / {tsize / 1024 / 1024:.1f} MB",
@@ -102,11 +103,11 @@ def pack(module_name: str):
     return f"./{output}"
 
 
-def release(proj_name="openlist", repo_name="Yxiguan/OpenList_123"):
+def release(repo_name: str, md5_txt: str, tar_name: str, proj_name="openlist"):
     try:
         ver, url = latest_release(repo_name)
-        md5 = remote_md5(url)
-        tar = download(url, f"./__pycache__/{md5}.tar.gz", md5)
+        md5 = remote_md5(url, md5_txt, tar_name)
+        tar = download(url, f"./__pycache__/{md5}.tar.gz", md5, tar_name)
         extract(tar, f"./{proj_name}/bin")
         with open(f"./{proj_name}/version", "w", encoding="utf-8") as f:
             f.write(ver)
@@ -115,8 +116,14 @@ def release(proj_name="openlist", repo_name="Yxiguan/OpenList_123"):
         pack(proj_name)
 
     except Exception as e:
-        print(f"发布出错: {e}")
+        print(f"发布出错: {e}, 重试中...")
+        time.sleep(3)
+        release(repo_name, md5_txt, tar_name, proj_name)
 
 
 if __name__ == "__main__":
-    release()
+    release(
+        repo_name="Yxiguan/OpenList_123",
+        md5_txt="md5-linux-musl.txt",
+        tar_name="openlist-linux-musl-arm64",
+    )

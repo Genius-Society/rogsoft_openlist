@@ -78,6 +78,8 @@ detect_running_status() {
     PID=$(pidof ${BINNAME})
     if [ "$i" -lt 1 ]; then
       echo_date "🔴$1进程启动失败，请检查你的配置！"
+      dbus set openlist_enable=0
+      stop_plugin
       return
     fi
   done
@@ -487,7 +489,7 @@ check_memory() {
         dbus set openlist_memory_warn=1
       fi
     else
-      echo_date"⚠️未查询到系统内存，请自行注意系统内存！"
+      echo_date "⚠️未查询到系统内存，请自行注意系统内存！"
     fi
   fi
   echo_date "=============================================="

@@ -103,7 +103,7 @@ def pack(module_name: str):
     return f"./{output}"
 
 
-def release(repo_name: str, md5_txt: str, tar_name: str, proj_name="openlist"):
+def release(repo_name: str, md5_txt: str, tar_name: str, proj_name="openlist", delay=3):
     try:
         ver, url = latest_release(repo_name)
         md5 = remote_md5(url, md5_txt, tar_name)
@@ -116,8 +116,8 @@ def release(repo_name: str, md5_txt: str, tar_name: str, proj_name="openlist"):
         pack(proj_name)
 
     except Exception as e:
-        print(f"发布出错: {e}, 重试中...")
-        time.sleep(3)
+        print(f"发布出错: {e}, {delay}s 后重试中...")
+        time.sleep(delay)
         release(repo_name, md5_txt, tar_name, proj_name)
 
 

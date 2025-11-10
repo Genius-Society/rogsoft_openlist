@@ -3,7 +3,7 @@
 [![sf](https://img.shields.io/badge/release-SourceForge-ff6600.svg)](https://sourceforge.net/projects/rogsoft-openlist/files)
 [![bili](https://img.shields.io/badge/bilibili-BV18ergYRERP-fc8bab.svg)](https://www.bilibili.com/video/BV18ergYRERP/?p=2)
 
-一个支持多种存储, 支持网页浏览和 WebDAV 的文件列表程序, 由 gin 和 Solidjs 驱动, 当前项目为其解限 pan123 下载 1G 流量限制的 KoolCenter 插件版本
+一个支持多种存储, 支持网页浏览和 WebDAV 的文件列表程序, 由 gin 和 Solidjs 驱动, 当前项目为其解限 pan123 下载 1G 流量限制的 KoolCenter 插件版本, 且支持容量条
 
 <a href="https://github.com/Genius-Society/rogsoft_openlist" target="_blank">
     <img src="./openlist/res/icon-openlist.png" style="width: 160px;">
@@ -38,18 +38,6 @@
 | GT-AX6000        | 1GB   | BCM4912 | armv8 | 4    | 2.0GHz  |
 | GT-AX11000_PRO   | 1GB   | BCM4912 | armv8 | 4    | 2.0GHz  |
 | RT-AX86U_PRO     | 1GB   | BCM4912 | armv8 | 4    | 2.0GHz  |
-<!-- | RAX50            | 512MB | BCM6750 | armv7 | 3    | 1.5 GHz |
-| RAX70            | 512MB | BCM6755 | armv7 | 4    | 1.5 GHz |
-| RT-AX56U         | 512MB | BCM6755 | armv7 | 4    | 1.5 GHz |
-| RT-AX56U_V2      | 256MB | BCM6755 | armv7 | 4    | 1.5 GHz |
-| RT-AX58U         | 512MB | BCM6750 | armv7 | 3    | 1.5 GHz |
-| RT-AX82U         | 512MB | BCM6750 | armv7 | 3    | 1.5 GHz |
-| TUF-AX3000       | 512MB | BCM6750 | armv7 | 3    | 1.5 GHz |
-| TUF-AX5400       | 512MB | BCM6750 | armv7 | 3    | 1.5 GHz |
-| ZenWiFi_XT8      | 512MB | BCM6755 | armv7 | 4    | 1.5 GHz |
-| ZenWiFi_XD4      | 256MB | BCM6755 | armv7 | 4    | 1.5 GHz |
-| TUF-AX3000_V2    | 512MB | BCM6756 | armv7 | 4    | 1.7GHz  |
-| RT-AX57          | 256MB | BCM6756 | armv7 | 4    | 1.7GHz  | -->
 
 ## 代码下载
 ```bash

@@ -1,4 +1,4 @@
-# KoolCenter 插件 - OpenList文件列表 (123解限版)
+# KoolCenter 插件 - OpenList文件列表 (自动升级版)
 [![license](https://img.shields.io/github/license/Genius-Society/rogsoft_openlist.svg)](./LICENSE)
 [![sf](https://img.shields.io/badge/release-SourceForge-ff6600.svg)](https://sourceforge.net/projects/rogsoft-openlist/files)
 [![bili](https://img.shields.io/badge/bilibili-BV18ergYRERP-fc8bab.svg)](https://www.bilibili.com/video/BV18ergYRERP/?p=2)
@@ -58,6 +58,4 @@ python build.py
 ```
 
 ## 致谢
-- <https://github.com/Yxiguan/OpenList_123>
 - <https://github.com/OpenListTeam/OpenList>
-- <https://github.com/everstu/Koolcenter_openlist>

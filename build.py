@@ -124,7 +124,7 @@ def release(repo_name: str, md5_txt: str, tar_name: str, proj_name="openlist", d
 
 if __name__ == "__main__":
     release(
-        repo_name="Yxiguan/OpenList_123",
+        repo_name="OpenListTeam/OpenList",
         md5_txt="md5-linux-musl.txt",
         tar_name="openlist-linux-musl-arm64",
     )

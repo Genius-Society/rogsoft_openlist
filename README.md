@@ -1,5 +1,6 @@
 # KoolCenter 插件 - OpenList文件列表 (自动升级版)
 [![license](https://img.shields.io/github/license/Genius-Society/rogsoft_openlist.svg)](./LICENSE)
+[![github-action](https://github.com/Genius-Society/rogsoft_openlist/actions/workflows/auto-release.yml/badge.svg?branch=main)](https://github.com/Genius-Society/rogsoft_openlist/actions/workflows/auto-release.yml)
 [![sf](https://img.shields.io/badge/release-SourceForge-ff6600.svg)](https://sourceforge.net/projects/rogsoft-openlist/files)
 [![bili](https://img.shields.io/badge/bilibili-BV18ergYRERP-fc8bab.svg)](https://www.bilibili.com/video/BV18ergYRERP/?p=2)
 

@@ -815,15 +815,7 @@
 										<div class="SimpleNote">
 											<a href="https://github.com/OpenListTeam/OpenList"
 												target="_blank"><em><u>OpenList</u></em></a>&nbsp;是一个支持多种存储的文件列表程序, 使用
-											Gin
-											和 Solidjs 开发
-											<div style="float: right;"><span><a type="button"
-														href="https://github.com/Genius-Society/rogsoft_openlist/releases"
-														target="_blank" class="ks_btn"
-														style="margin-left:5px;">更新日志</a></span>
-												<span><a type="button" class="ks_btn" href="javascript:void(0);"
-														onclick="get_log(1)" style="margin-left:5px;">插件日志</a></span>
-											</div>
+											Gin 和 Solidjs 开发
 										</div>
 										<div id="openlist_status_pannel">
 											<table width="100%" border="1" align="center" cellpadding="4"
@@ -838,6 +830,10 @@
 															class="hintstyle" href="javascript:void(0);">运行状态</a></th>
 													<td>
 														<span style="margin-left:4px" id="openlist_status"></span>
+														<div style="float: right;"><span><a type="button" class="ks_btn"
+																	href="javascript:void(0);" onclick="get_log(1)"
+																	style="margin-left:5px;">插件日志</a></span>
+														</div>
 													</td>
 												</tr>
 												<tr id="openlist_version_tr" style="display: none;">
@@ -845,6 +841,10 @@
 															class="hintstyle" href="javascript:void(0);">版本信息</a></th>
 													<td>
 														<span style="margin-left:4px" id="openlist_binver"></span>
+														<div style="float: right;"><span><a type="button"
+																	href="https://github.com/Genius-Society/rogsoft_openlist/releases"
+																	target="_blank" class="ks_btn"
+																	style="margin-left:5px;">更新日志</a></span></div>
 													</td>
 												</tr>
 												<tr id="openlist_info_tr" style="display: none;">

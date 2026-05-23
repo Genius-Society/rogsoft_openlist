@@ -19,6 +19,10 @@ echo_date "rm -rf /koolshare/configs/openlist"
 echo_date ""
 echo_date "--------------------------------"
 
+for key in $(dbus listall | grep 'openlist_' | cut -d '=' -f1); do
+    dbus remove "$key"
+done
+
 rm -rf /koolshare/scripts/uninstall_openlist.sh
 echo_date "已成功移除插件... Bye~Bye~"
 echo_date ""

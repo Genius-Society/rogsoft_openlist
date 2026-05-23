@@ -82,7 +82,7 @@ exit_install() {
 		exit 1
 		;;
 	2)
-		echo_date "Alist插件目前仅支持hnd机型中的armv8机型！"
+		echo_date "OpenList插件目前仅支持hnd机型中的armv8机型！"
 		echo_date "你的路由器不能安装！！!"
 		echo_date "退出安装！"
 		rm -rf /tmp/openlist* >/dev/null 2>&1

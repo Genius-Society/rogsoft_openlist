@@ -204,6 +204,10 @@ checkIsNeedMigrate() {
 	fi
 	# 设置迁移标志
 	dbus set openlist_is_migrate="1"
+	# 清理 alist dbus 变量
+	for key in $(dbus listall | grep 'alist_' | cut -d '=' -f1); do
+		dbus remove "$key"
+	done
 }
 
 migrateDbus() {

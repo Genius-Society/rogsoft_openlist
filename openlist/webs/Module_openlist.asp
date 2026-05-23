@@ -118,6 +118,7 @@
 			register_event();
 			get_dbus_data();
 			check_status();
+			check_ver();
 		}
 		function set_skin() {
 			var SKN = '<% nvram_get("sc_skin"); %>';
@@ -255,9 +256,9 @@
 			}
 
 			if (dbus["openlist_binver"]) {
-				E("openlist_binver").innerHTML = "程序及面板版本: <em>" + dbus["openlist_binver"] + "</em>";
+				E("openlist_binver").innerHTML = "当前版本: <em>" + dbus["openlist_binver"] + "</em>";
 			} else {
-				E("openlist_binver").innerHTML = "程序及面板版本: <em>null</em>";
+				E("openlist_binver").innerHTML = "当前版本: <em>null</em>";
 			}
 		}
 
@@ -398,6 +399,23 @@
 				error: function () {
 					E("openlist_status").innerHTML = "获取运行状态失败";
 					setTimeout("check_status();", 5000);
+				}
+			});
+		}
+
+		function check_ver() {
+			var id = parseInt(Math.random() * 100000000);
+			var postData = { "id": id, "method": "openlist_config.sh", "params": ['ver'], "fields": "" };
+			$.ajax({
+				type: "POST",
+				url: "/_api/",
+				async: true,
+				data: JSON.stringify(postData),
+				success: function (response) {
+					E("openlist_gitver").innerHTML = "最新版本: <em>v" + response.result + "</em>";
+				},
+				error: function () {
+					E("openlist_gitver").innerHTML = "最新版本: <em>null</em>";
 				}
 			});
 		}
@@ -816,6 +834,10 @@
 											<a href="https://github.com/OpenListTeam/OpenList"
 												target="_blank"><em><u>OpenList</u></em></a>&nbsp;是一个支持多种存储的文件列表程序, 使用
 											Gin 和 Solidjs 开发
+											<div style="float: right;"><span><a type="button"
+														href="https://github.com/Genius-Society/rogsoft_openlist/releases"
+														target="_blank" class="ks_btn"
+														style="margin-left:5px;">更新日志</a></span></div>
 										</div>
 										<div id="openlist_status_pannel">
 											<table width="100%" border="1" align="center" cellpadding="4"
@@ -841,10 +863,11 @@
 															class="hintstyle" href="javascript:void(0);">版本信息</a></th>
 													<td>
 														<span style="margin-left:4px" id="openlist_binver"></span>
+														<span style="margin-left:4px" id="openlist_gitver"></span>
 														<div style="float: right;"><span><a type="button"
 																	href="https://github.com/Genius-Society/rogsoft_openlist/releases"
 																	target="_blank" class="ks_btn"
-																	style="margin-left:5px;">更新日志</a></span></div>
+																	style="margin-left:5px;">更新插件</a></span></div>
 													</td>
 												</tr>
 												<tr id="openlist_info_tr" style="display: none;">

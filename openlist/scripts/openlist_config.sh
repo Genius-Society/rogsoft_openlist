@@ -744,6 +744,10 @@ check_status() {
   fi
 }
 
+check_ver() {
+  http_response $(curl -s https://raw.githubusercontent.com/Genius-Society/rogsoft_openlist/refs/heads/main/openlist/version)
+}
+
 case $1 in
 start)
   if [ "${openlist_enable}" == "1" ]; then
@@ -811,5 +815,8 @@ web_submit)
   ;;
 status)
   check_status
+  ;;
+ver)
+  check_ver
   ;;
 esac

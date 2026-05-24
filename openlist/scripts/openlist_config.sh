@@ -743,7 +743,12 @@ update() {
   if [ "${local_ver}" == "${latest_ver}" ]; then
     echo_date "OpenList 已是最新版本, 无需更新!"
   else
-    wget -P /tmp https://github.com/Genius-Society/rogsoft_openlist/releases/download/${latest_ver}/openlist.tar.gz 2>&1
+    local status=$(curl -x http://127.0.0.1:23456 -s -o /dev/null -w "%{http_code}" https://github.com)
+    if [ "${status}" == "200" ]; then
+      wget --no-hsts -c -t 0 -T 30 -e use_proxy=yes -e https_proxy=http://127.0.0.1:23456 -O /tmp/upload/openlist.tar.gz "https://github.com/Genius-Society/rogsoft_openlist/releases/download/${latest_ver}/openlist.tar.gz" 2>&1
+    else
+      wget --no-hsts -c -t 0 -T 30 -O /tmp/upload/openlist.tar.gz "https://github.com/Genius-Society/rogsoft_openlist/releases/download/${latest_ver}/openlist.tar.gz" 2>&1
+    fi
     dbus set soft_name=openlist.tar.gz
     sh /koolshare/scripts/ks_tar_install.sh 2>&1
     echo_date "OpenList 插件已更新!"

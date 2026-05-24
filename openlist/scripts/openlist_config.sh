@@ -744,8 +744,8 @@ update() {
     echo_date "OpenList 已是最新版本, 无需更新!"
   else
     wget -P /tmp https://github.com/Genius-Society/rogsoft_openlist/releases/download/${latest_ver}/openlist.tar.gz 2>&1
-    tar -zxf /tmp/openlist.tar.gz 2>&1
-    sh /tmp/openlist/install.sh 2>&1
+    dbus set soft_name=openlist.tar.gz
+    sh /koolshare/scripts/ks_tar_install.sh 2>&1
     echo_date "OpenList 插件已更新!"
   fi
 }

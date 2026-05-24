@@ -738,13 +738,14 @@ check_ver() {
 }
 
 update() {
-  local ver = $(curl -s https://raw.githubusercontent.com/Genius-Society/rogsoft_openlist/refs/heads/main/openlist/version)
-  if [ "${openlist_version}" == "${ver}" ]; then
+  local local_ver = $(dbus get openlist_version)
+  local latest_ver = $(curl -s https://raw.githubusercontent.com/Genius-Society/rogsoft_openlist/refs/heads/main/openlist/version)
+  if [ "${local_ver}" == "${vlatest_verr}" ]; then
     echo_date "OpenList 已是最新版本, 无需更新!"
   else
-    wget -P /tmp https://github.com/Genius-Society/rogsoft_openlist/releases/download/${ver}/openlist.tar.gz
-    tar -zxf /tmp/openlist.tar.gz
-    sh /tmp/openlist/install.sh
+    wget -P /tmp https://github.com/Genius-Society/rogsoft_openlist/releases/download/${latest_ver}/openlist.tar.gz 2>&1
+    tar -zxf /tmp/openlist.tar.gz 2>&1
+    sh /tmp/openlist/install.sh 2>&1
     echo_date "OpenList 插件已更新!"
   fi
 }

@@ -92,6 +92,10 @@
 			font-size: 14px;
 			font-family: Roboto-Light, "Microsoft JhengHei";
 		}
+
+		#upd {
+			display: none;
+		}
 	</style>
 	<script type="text/javascript">
 		var dbus = {};
@@ -234,11 +238,7 @@
 			}
 			if (dbus["openlist_version"]) {
 				E("openlist_version").innerHTML = " - " + dbus["openlist_version"];
-			}
-			if (dbus["openlist_binver"]) {
-				E("openlist_binver").innerHTML = "当前版本: <em>" + dbus["openlist_binver"] + "</em>";
-			} else {
-				E("openlist_binver").innerHTML = "当前版本: <em>null</em>";
+				E("openlist_binver").innerHTML = "当前版本: <em>v" + dbus["openlist_version"] + "</em>";
 			}
 		}
 
@@ -381,7 +381,14 @@
 				async: true,
 				data: JSON.stringify(postData),
 				success: function (response) {
-					E("openlist_gitver").innerHTML = "最新版本: <em>v" + response.result + "</em>";
+					var gitver = response.result;
+					if (gitver == dbus["openlist_version"]) {
+						E("openlist_gitver").innerHTML = "最新版本: <em>v" + gitver + "</em>";
+					}
+					else {
+						E("openlist_gitver").innerHTML = "最新版本: <em style='color: orangered'>v" + gitver + "</em>";
+						$("#upd").show();
+					}
 				},
 				error: function () {
 					E("openlist_gitver").innerHTML = "最新版本: <em>null</em>";
@@ -832,7 +839,7 @@
 													<td>
 														<span style="margin-left:4px" id="openlist_binver"></span>
 														<span style="margin-left:4px" id="openlist_gitver"></span>
-														<div style="float: right;"><span><a type="button"
+														<div id="upd" style="float: right;"><span><a type="button"
 																	href="javascript:void(0);" onclick="save(4)"
 																	class="ks_btn"
 																	style="margin-left:5px;">更新插件</a></span></div>

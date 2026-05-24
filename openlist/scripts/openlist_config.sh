@@ -205,11 +205,6 @@ makeConfig() {
     dbus set openlist_force_https="0"
   fi
 
-  #	#初始化验证SSL证书
-  #	if [ "${openlist_check_ssl_cert}" == "0" ]; then
-  #		configCheckSslCert=false
-  #	fi
-
   #初始化延迟启动时间
   if [ $(number_test ${openlist_delayed_start}) != "0" ]; then
     dbus set openlist_delayed_start=0
@@ -573,7 +568,7 @@ start() {
 
   # 6. gen version info everytime
   /koolshare/bin/openlist version >${OpenListBaseDir}/openlist.version
-  
+
   # 7. start process
   start_process
 
@@ -744,13 +739,13 @@ check_ver() {
 
 update() {
   local ver = $(curl -s https://raw.githubusercontent.com/Genius-Society/rogsoft_openlist/refs/heads/main/openlist/version)
-  if [ "${openlist_binver}" == "${ver}" ]; then
+  if [ "${openlist_version}" == "v${ver}" ]; then
+    echo_date "OpenList 已是最新版本, 无需更新!"
+  else
     wget -P /tmp https://github.com/Genius-Society/rogsoft_openlist/releases/download/${ver}/openlist.tar.gz
     tar -zxf /tmp/openlist.tar.gz
     sh /tmp/openlist/install.sh
     echo_date "OpenList 插件已更新!"
-  else
-    echo_date "OpenList 已是最新版本, 无需更新!"
   fi
 }
 

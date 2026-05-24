@@ -216,8 +216,7 @@ migrateDbus() {
 		while IFS= read -r line; do
 			# 替换 alist_ 为 openlist_
 			new_line=$(echo "$line" | sed 's/alist_/openlist_/')
-			dbus set "$new_line"
-			dbus remove openlist_binver
+			dbus set "$new_line" 
 		done
 }
 

@@ -748,6 +748,18 @@ check_ver() {
   http_response $(curl -s https://raw.githubusercontent.com/Genius-Society/rogsoft_openlist/refs/heads/main/openlist/version)
 }
 
+update() {
+  local ver = $(curl -s https://raw.githubusercontent.com/Genius-Society/rogsoft_openlist/refs/heads/main/openlist/version)
+  if [ "${openlist_binver}" == "${ver}" ]; then
+    wget -P /tmp https://github.com/Genius-Society/rogsoft_openlist/releases/download/${ver}/openlist.tar.gz
+    tar -zxf /tmp/openlist.tar.gz
+    sh /tmp/openlist/install.sh
+    echo_date "OpenList 插件已更新!"
+  else
+    echo_date "OpenList 已是最新版本, 无需更新!"
+  fi
+}
+
 case $1 in
 start)
   if [ "${openlist_enable}" == "1" ]; then
@@ -806,6 +818,9 @@ web_submit)
   elif [ "${openlist_enable}" == "3" ]; then
     dbus set openlist_enable=1
     random_password | tee -a ${LOG_FILE}
+  elif [ "${openlist_enable}" == "4" ]; then
+    dbus set openlist_enable=1
+    update | tee -a ${LOG_FILE}
   else
     echo_date "ℹ️停止openList！" | tee -a ${LOG_FILE}
     stop_plugin | tee -a ${LOG_FILE}

@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   job-on-schedule:
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     steps:
       # Step 1: 检出当前仓库代码
@@ -42,7 +42,7 @@ jobs:
           fi
 
   job-on-push:
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       # Step 1: 检出当前仓库代码

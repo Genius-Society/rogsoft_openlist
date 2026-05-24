@@ -865,8 +865,8 @@
 														<span style="margin-left:4px" id="openlist_binver"></span>
 														<span style="margin-left:4px" id="openlist_gitver"></span>
 														<div style="float: right;"><span><a type="button"
-																	href="https://github.com/Genius-Society/rogsoft_openlist/releases"
-																	target="_blank" class="ks_btn"
+																	href="javascript:void(0);" onclick="save(4)"
+																	class="ks_btn"
 																	style="margin-left:5px;">更新插件</a></span></div>
 													</td>
 												</tr>

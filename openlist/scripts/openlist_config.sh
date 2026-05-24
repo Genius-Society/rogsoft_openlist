@@ -739,7 +739,7 @@ check_ver() {
 
 update() {
   local ver = $(curl -s https://raw.githubusercontent.com/Genius-Society/rogsoft_openlist/refs/heads/main/openlist/version)
-  if [ "${openlist_version}" == "v${ver}" ]; then
+  if [ "${openlist_version}" == "${ver}" ]; then
     echo_date "OpenList 已是最新版本, 无需更新!"
   else
     wget -P /tmp https://github.com/Genius-Society/rogsoft_openlist/releases/download/${ver}/openlist.tar.gz

@@ -9,7 +9,7 @@
 	<meta http-equiv="Expires" content="-1" />
 	<link rel="shortcut icon" href="/res/icon-openlist.png" />
 	<link rel="icon" href="/res/icon-openlist.png" />
-	<title>软件中心 - OpenList文件列表</title>
+	<title>软件中心 - OpenList 文件列表</title>
 	<link rel="stylesheet" type="text/css" href="index_style.css">
 	<link rel="stylesheet" type="text/css" href="form_style.css">
 	<link rel="stylesheet" type="text/css" href="usp_style.css">
@@ -54,13 +54,11 @@
 			width: 100%;
 			height: 100%;
 			z-index: 99;
-			/*background-color: #444F53;*/
 			filter: alpha(opacity=90);
 			/*IE5、IE5.5、IE6、IE7*/
 			background-repeat: repeat;
 			visibility: hidden;
 			overflow: hidden;
-			/*background: url(/images/New_ui/login_bg.png);*/
 			background: rgba(68, 79, 83, 0.85) none repeat scroll 0 0 !important;
 			background-position: 0 0;
 			background-size: cover;
@@ -70,7 +68,6 @@
 		.FormTitle em {
 			color: #00ffe4;
 			font-style: normal;
-			/*font-weight:bold;*/
 		}
 
 		.FormTable th {
@@ -169,15 +166,9 @@
 					}
 				}
 
-				if (!dbus["openlist_url_error"] && dbus["openlist_publicswitch"] == 1 && dbus["openlist_site_url"]) {
-					//暂时不判断是否未内网ip访问面板
-					//理论上内网IP访问面板需要用内网IP访问
-					//用外网域名会导致无法访问。
-					// 			if(! isInnerIPFn()){
+				if (!dbus["openlist_url_error"] && dbus["openlist_publicswitch"] == 1 && dbus["openlist_site_url"]) { // 暂时不判断是否未内网ip访问面板, 理论上内网IP访问面板需要用内网IP访问, 用外网域名会导致无法访问。
 					webUiHref = dbus["openlist_site_url"];
-					// 			}
 				}
-
 
 				E("fileb").href = webUiHref;
 				E("fileb").innerHTML = "访问 OpenList 面板";
@@ -185,29 +176,20 @@
 		}
 
 		/*判断是否是内网IP*/
-		function isInnerIPFn() {
-			// 获取当前页面url
+		function isInnerIPFn() { // 获取当前页面url
 			var curPageUrl = window.location.href;
-			console.log('curPageUrl-0  ' + curPageUrl);
-
-			var reg1 = /(http|ftp|https|www):\/\//g;//去掉前缀
+			console.log('curPageUrl-0 ' + curPageUrl);
+			var reg1 = /(http|ftp|https|www):\/\//g; // 去掉前缀
 			curPageUrl = curPageUrl.replace(reg1, '');
-			// console.log('curPageUrl-1  '+curPageUrl);
-
-			var reg2 = /\:+/g;//替换冒号为一点
+			var reg2 = /\:+/g; // 替换冒号为一点
 			curPageUrl = curPageUrl.replace(reg2, '.');
-			// console.log('curPageUrl-2  '+curPageUrl);
-
-			curPageUrl = curPageUrl.split('.');//通过一点来划分数组
+			curPageUrl = curPageUrl.split('.'); // 通过一点来划分数组
 			console.log(curPageUrl);
-
-
 			var ipAddress = curPageUrl[0] + '.' + curPageUrl[1] + '.' + curPageUrl[2] + '.' + curPageUrl[3];
-
-			var isInnerIp = false;//默认给定IP不是内网IP
+			var isInnerIp = false; // 默认给定IP不是内网IP
 			var ipNum = getIpNum(ipAddress);
 			/**
-			 * 私有IP：A类  10.0.0.0    -10.255.255.255
+			 * 私有IP: A类  10.0.0.0    -10.255.255.255
 			 *       B类  172.16.0.0  -172.31.255.255
 			 *       C类  192.168.0.0 -192.168.255.255
 			 *       D类   127.0.0.0   -127.255.255.255(环回地址)
@@ -221,7 +203,6 @@
 			var dBegin = getIpNum("127.0.0.0");
 			var dEnd = getIpNum("127.255.255.255");
 			isInnerIp = isInner(ipNum, aBegin, aEnd) || isInner(ipNum, bBegin, bEnd) || isInner(ipNum, cBegin, cEnd) || isInner(ipNum, dBegin, dEnd);
-			//     console.log('是否是内网:'+isInnerIp);
 			return isInnerIp;
 		}
 
@@ -255,15 +236,15 @@
 			}
 
 			if (dbus["openlist_binver"]) {
-				E("openlist_binver").innerHTML = "程序版本：<em>" + dbus["openlist_binver"] + "</em>";
+				E("openlist_binver").innerHTML = "程序版本: <em>" + dbus["openlist_binver"] + "</em>";
 			} else {
-				E("openlist_binver").innerHTML = "程序版本：<em>null</em>";
+				E("openlist_binver").innerHTML = "程序版本: <em>null</em>";
 			}
 
 			if (dbus["openlist_webver"]) {
-				E("openlist_webver").innerHTML = "面板版本：<em>" + dbus["openlist_webver"] + "</em>";
+				E("openlist_webver").innerHTML = "面板版本: <em>" + dbus["openlist_webver"] + "</em>";
 			} else {
-				E("openlist_webver").innerHTML = "面板版本：<em>null</em>";
+				E("openlist_webver").innerHTML = "面板版本: <em>null</em>";
 			}
 		}
 
@@ -319,11 +300,11 @@
 			}
 
 			if (dbus["openlist_cert_error"] == "1" && dbus["openlist_key_error"] == "1") {
-				E("warn_cert").innerHTML = "【下方证书公钥Cert文件 + 证书私钥Key文件配置错误，无法启用https！详见插件日志】";
+				E("warn_cert").innerHTML = "【下方证书公钥Cert文件 + 证书私钥Key文件配置错误, 无法启用https！详见插件日志】";
 			} else if (dbus["openlist_cert_error"] == "1" && dbus["openlist_key_error"] != "1") {
-				E("warn_cert").innerHTML = "【下方证书公钥Cert文件配置错误，无法启用https！详见插件日志】";
+				E("warn_cert").innerHTML = "【下方证书公钥Cert文件配置错误, 无法启用https！详见插件日志】";
 			} else if (dbus["openlist_cert_error"] != "1" && dbus["openlist_key_error"] == "1") {
-				E("warn_cert").innerHTML = "【下方证书私钥Key文件配置错误，无法启用https！详见插件日志】";
+				E("warn_cert").innerHTML = "【下方证书私钥Key文件配置错误, 无法启用https！详见插件日志】";
 			}
 
 			// SHOW HIDE
@@ -346,21 +327,14 @@
 					E("al_cert").style.display = "none";
 					E("al_key").style.display = "none";
 					E("al_https_port").style.display = "none";
-					// 			E("al_disable_http").style.display = "none";
 					E("al_force_https").style.display = "none";
 					E("al_open_https_port").style.display = "none";
 				} else {
 					E("al_cert").style.display = "";
 					E("al_key").style.display = "";
 					E("al_https_port").style.display = "";
-					// 			E("al_disable_http").style.display = "";
 					E("al_force_https").style.display = "";
 					E("al_open_https_port").style.display = "";
-					/* if(E("openlist_disable_http").checked == false){
-						E("al_force_https").style.display = "";
-					}else{
-						E("al_force_https").style.display = "none";
-					} */
 				}
 			}
 		}
@@ -469,7 +443,7 @@
 				},
 				error: function (xhr) {
 					E("loading_block_title").innerHTML = "暂无日志信息 ...";
-					E("log_content").value = "日志文件为空，请关闭本窗口！";
+					E("log_content").value = "日志文件为空, 请关闭本窗口！";
 					E("ok_button").style.visibility = "visible";
 					return false;
 				}
@@ -553,7 +527,7 @@
 				},
 				error: function (xhr) {
 					E("log_pannel_title").innerHTML = "暂无日志信息 ...";
-					E("log_content_openlist").value = "日志文件为空，请关闭本窗口！";
+					E("log_content_openlist").value = "日志文件为空, 请关闭本窗口！";
 					setTimeout("get_run_log();", 5000);
 				}
 			});
@@ -579,116 +553,116 @@
 			statusmenu = "";
 			width = "350px";
 			if (itemNum == 1) {
-				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;1. 此处显示openlist二进制程序在路由器后台的简要运行情况，详细运行日志可以点击顶部的<b>openlist运行日志</b>查看。<br/><br/>"
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;2. 当开启了实时进程守护后，可以看到openlist二进制运行时长，即守护运行时间。<br/><br/>"
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;3. 当出现<b>获取运行状态失败</b>时，可能是路由器后台登陆超时或者httpd进程崩溃导致，如果是后者，请等待路由器httpd进程恢复，或者自行使用ssh命令：server restart_httpd重启httpd。<br/><br/>"
+				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;1. 此处显示openlist二进制程序在路由器后台的简要运行情况, 详细运行日志可以点击顶部的<b>openlist运行日志</b>查看。<br/><br/>"
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;2. 当开启了实时进程守护后, 可以看到openlist二进制运行时长, 即守护运行时间。<br/><br/>"
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;3. 当出现<b>获取运行状态失败</b>时, 可能是路由器后台登陆超时或者httpd进程崩溃导致, 如果是后者, 请等待路由器httpd进程恢复, 或者自行使用ssh命令: server restart_httpd重启httpd。<br/><br/>"
 				_caption = "运行状态";
 			}
 			if (itemNum == 2) {
 				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;1. 此处显示openlist二进制程序的版本号及其内置的openlist面板版本号。<br/><br/>"
 				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;2. openlist二进制程序下载自openlist的github项目release页面的openlist-linux-arm64版本。<br/><br/>"
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;3.目前只支持hnd机型中的armv8机型，比如cpu型号为BCM4906、BCM4908、BCM4912等armv8机型。<br/><br/>"
-				_caption = "运行状态";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;3.目前只支持hnd机型中的armv8机型, 比如cpu型号为BCM4906、BCM4908、BCM4912等armv8机型。<br/><br/>"
+				_caption = "版本信息";
 			}
 			if (itemNum == 3) {
-				statusmenu = "！！！请注意：v3.25版本后不允许查看密码，只能重新生成！<br/><br/>"
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;点击【重置密码】可以重新生成当前面板的账号和密码，请注意：如果你需要配置webdav，同样应该使用此用户名和密码。<br/><br/>"
+				statusmenu = "！！！请注意: v3.25版本后不允许查看密码, 只能重新生成！<br/><br/>"
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;点击【重置密码】可以重新生成当前面板的账号和密码, 请注意: 如果你需要配置webdav, 同样应该使用此用户名和密码。<br/><br/>"
 				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;点击【openlist运行日志】可以实时查看openlist程序的运行情况。"
 				_caption = "信息获取";
 			}
 			if (itemNum == 4) {
 				width = "780px";
-				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;在不同的配置和网络环境下，点击【访问OpenList面板】进入的是不同地址：";
+				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;在不同的配置和网络环境下, 点击【访问OpenList面板】进入的是不同地址: ";
 				statusmenu += "<br/><br/>";
 				statusmenu += "1️⃣<font color='#F00'>局域网访问（http）</font><br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;1. openlist插件内：关闭公网访问<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;1. openlist插件内: 关闭公网访问<br/>";
 				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;2. 开启openlist插件<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;3. 此时点击【访问OpenList面板】就是访问局域网地址：https://192.168.50.1:5244，或：http://router.asus.com:5244";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;3. 此时点击【访问OpenList面板】就是访问局域网地址: https://192.168.50.1:5244, 或: http://router.asus.com:5244";
 				statusmenu += "<br/><br/>";
 				statusmenu += "2️⃣<font color='#F00'>公网ddns访问（http）</font><br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;0. 路由器已经配置了ddns，如域名 ax86.ddns.com 解析到路由器的公网ip<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;1. openlist插件内：开启公网访问<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;2. openlist插件内：关闭https<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;3. openlist插件内：网站URL可以不填写，或者填 http://ax86.ddns.com:5244<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;0. 路由器已经配置了ddns, 如域名 ax86.ddns.com 解析到路由器的公网ip<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;1. openlist插件内: 开启公网访问<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;2. openlist插件内: 关闭https<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;3. openlist插件内: 网站URL可以不填写, 或者填 http://ax86.ddns.com:5244<br/>";
 				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;4. 开启openlist插件<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;5. 网站URL不填的话，此时点击【访问OpenList面板】就是访问局域网地址：http://192.168.50.1:5244<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;6. 网站URL要填的话，填：http://ax86.ddns.com:5244，此时点击【访问OpenList面板】就是通过填写的url访问";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;5. 网站URL不填的话, 此时点击【访问OpenList面板】就是访问局域网地址: http://192.168.50.1:5244<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;6. 网站URL要填的话, 填: http://ax86.ddns.com:5244, 此时点击【访问OpenList面板】就是通过填写的url访问";
 				statusmenu += "<br/><br/>";
 				statusmenu += "3️⃣<font color='#F00'>公网ddns访问（https）</font><br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;0. 路由器已经配置了ddns，如域名 ax86.ddns.com，且配置了https证书<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;1. openlist插件内：开启公网访问<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;2. openlist插件内：开启https，证书公钥填/etc/cert.pem，证书私钥填：/etc/key.pem<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;3. openlist插件内：网站URL可以不填写，或者填https://ax86.ddns.com:5244<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;0. 路由器已经配置了ddns, 如域名 ax86.ddns.com, 且配置了https证书<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;1. openlist插件内: 开启公网访问<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;2. openlist插件内: 开启https, 证书公钥填/etc/cert.pem, 证书私钥填: /etc/key.pem<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;3. openlist插件内: 网站URL可以不填写, 或者填https://ax86.ddns.com:5244<br/>";
 				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;4. 开启openlist插件<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;5. 网站URL不填的话，此时点击【访问OpenList面板】就是访问局域网地址：https://192.168.50.1:5244，不过会提示证书不安全<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;6. 网站URL要填的话，填：https://ax86.ddns.com:5244，此时点击【访问OpenList面板】就是通过填写的url访问<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;7. 注意开启https后，所有http的访问方式将失效";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;5. 网站URL不填的话, 此时点击【访问OpenList面板】就是访问局域网地址: https://192.168.50.1:5244, 不过会提示证书不安全<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;6. 网站URL要填的话, 填: https://ax86.ddns.com:5244, 此时点击【访问OpenList面板】就是通过填写的url访问<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;7. 注意开启https后, 所有http的访问方式将失效";
 				statusmenu += "<br/><br/>";
 				statusmenu += "4️⃣<font color='#F00'>ddnsto穿透访问</font><br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;0. 路由器已经配置了ddnsto，如域名 ax86.ddnsto.com<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;1. openlist插件内：关闭公网访问关<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;2. ddnsto后台配置主域名：ax86-openlist，ax86要换成自己的主域名<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;3. ddnsto后台配置目标主机地址：http://192.168.60.1:5244<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;0. 路由器已经配置了ddnsto, 如域名 ax86.ddnsto.com<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;1. openlist插件内: 关闭公网访问关<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;2. ddnsto后台配置主域名: ax86-openlist, ax86要换成自己的主域名<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;3. ddnsto后台配置目标主机地址: http://192.168.60.1:5244<br/>";
 				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;4. 开启openlist插件<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;5. 此时点击【访问OpenList面板】就是访问ddnsto地址：https://ax86-openlist.ddnsto.com<br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;5. 此时点击【访问OpenList面板】就是访问ddnsto地址: https://ax86-openlist.ddnsto.com<br/>";
 				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;6. 你也可以开启公网访问后填写https://ax86-openlist.ddnsto.com到网站URL";
 				statusmenu += "</div>";
-				_caption = "说明：";
+				_caption = "说明: ";
 				return overlib(statusmenu, OFFSETX, -160, OFFSETY, 10, RIGHT, STICKY, WIDTH, 'width', CAPTION, _caption, CLOSETITLE, '');
 			}
 			if (itemNum == 5) {
-				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;采用perp对openlist进程进行实时进程守护，这比一些定时检查脚本更有效率，当然如果openlist程序在你的路由器上运行良好，完全可以不使用进程守护。"
-				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;由于openlist对路由器资源占用较多，所以强烈建议为路由器配置1G及以上的虚拟内存，以保证openlist的稳定运行！"
+				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;采用perp对openlist进程进行实时进程守护, 这比一些定时检查脚本更有效率, 当然如果openlist程序在你的路由器上运行良好, 完全可以不使用进程守护。"
+				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;由于openlist对路由器资源占用较多, 所以强烈建议为路由器配置1G及以上的虚拟内存, 以保证openlist的稳定运行！"
 				_caption = "实时进程守护";
 			}
 			if (itemNum == 6) {
-				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;开启公网访问后，openlist将监听在0.0.0.0地址，这样就能从WAN外部访问路由器内的openlist面板。<br/><br/>"
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;关闭公网访问后，openlist将监听在局域网地址如：192.168.50.1上，这样openlist面板仅能从局域网内部访问，"
+				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;开启公网访问后, openlist将监听在0.0.0.0地址, 这样就能从WAN外部访问路由器内的openlist面板。<br/><br/>"
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;关闭公网访问后, openlist将监听在局域网地址如: 192.168.50.1上, 这样openlist面板仅能从局域网内部访问, "
 				_caption = "开启公网访问";
 			}
 			if (itemNum == 7) {
-				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;openlist面板默认端口为5244，你可以自行更改为其它端口。请注意：如果你需要配置webdav，同样应该使用该端口！。<br/><br/>"
+				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;openlist面板默认端口为5244, 你可以自行更改为其它端口。请注意: 如果你需要配置webdav, 同样应该使用该端口！。<br/><br/>"
 				_caption = "面板端口";
 			}
 			if (itemNum == 8) {
 				width = "780px";
-				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;网站URL可以不配置，但是如果你需要跟朋友分享资源的时候，比如你在局域网内通过http://192.168.50.1:5244登陆了openlist，"
-				statusmenu += "此时你想跟朋友分享资源的时候，复制某个文件连接，该连接仍然是http://192.168.50.1:5244/xxxx。<br/><br/>"
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;如果你给路由器配置了ddns访问路由器：https://ax86u.ddns.com:8443，那么可以将：https://ax86u.ddns.com:5224填写进去，然后你复制的文件连接就会是：https://ax86u.ddns.com:5244/xxxx<br/><br/>"
+				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;网站URL可以不配置, 但是如果你需要跟朋友分享资源的时候, 比如你在局域网内通过http://192.168.50.1:5244登陆了openlist, "
+				statusmenu += "此时你想跟朋友分享资源的时候, 复制某个文件连接, 该连接仍然是http://192.168.50.1:5244/xxxx。<br/><br/>"
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;如果你给路由器配置了ddns访问路由器: https://ax86u.ddns.com:8443, 那么可以将: https://ax86u.ddns.com:5224填写进去, 然后你复制的文件连接就会是: https://ax86u.ddns.com:5244/xxxx<br/><br/>"
 				_caption = "网站URL";
 				return overlib(statusmenu, OFFSETX, -160, OFFSETY, 10, RIGHT, STICKY, WIDTH, 'width', CAPTION, _caption, CLOSETITLE, '');
 			}
 			if (itemNum == 9) {
-				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;openlist运行在路由器上，如果访问openlist面板，路由器上的openlist程序会将面板所需要的网页、javaScript文件、图标等资源等发送给访问的设备，这会消耗不少的路由器cpu资源。<br/><br/>"
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;此时给openlist后台面板配置静态CDN，这些相关的静态资源如：网页、javaScript文件、图标，就会从公网的CDN服务器商获取，而不再请求路由器内的openlist程序。<br/><br/>"
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;你可以前往openlist文档网站，获取openlist官方提供的一些CDN地址。<br/><br/>"
+				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;openlist运行在路由器上, 如果访问openlist面板, 路由器上的openlist程序会将面板所需要的网页、javaScript文件、图标等资源等发送给访问的设备, 这会消耗不少的路由器cpu资源。<br/><br/>"
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;此时给openlist后台面板配置静态CDN, 这些相关的静态资源如: 网页、javaScript文件、图标, 就会从公网的CDN服务器商获取, 而不再请求路由器内的openlist程序。<br/><br/>"
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;你可以前往openlist文档网站, 获取openlist官方提供的一些CDN地址。<br/><br/>"
 				_caption = "CDN地址";
 			}
 			if (itemNum == 10) {
 				width = "690px";
-				statusmenu = "1️⃣只有当开启公网访问时才能启用https，且建议路由器已经配置了DDNS + https证书的情况下才启用https选项！<br/><br/>";
-				statusmenu += "2️⃣启用https后，下面的<b>证书公钥Cert文件</b>和<b>证书私钥Key文件</b>选项也必须正确填写，才能起作用！<br/><br/>";
-				statusmenu += "3️⃣https启用成功后，后台面板就无法使用http地址进行访问了！<br/><br/>";
-				statusmenu += "4️⃣如果你为路由器配置了DDNS和https证书，openlist可以使用相同的证书，即：<br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;证书Cert文件路径(绝对路径)：<font color='#CC0066'>/etc/cert.pem</font><br/>";
-				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;证书Key文件路径(绝对路径)：<font color='#CC0066'>/etc/key.pem</font><br/><br/>";
-				statusmenu += "5️⃣如果你使用ddnsto内网穿透服务，请不要开启https选项！<br/><br/>";
-				_caption = "启用https：";
+				statusmenu = "1️⃣只有当开启公网访问时才能启用https, 且建议路由器已经配置了DDNS + https证书的情况下才启用https选项！<br/><br/>";
+				statusmenu += "2️⃣启用https后, 下面的<b>证书公钥Cert文件</b>和<b>证书私钥Key文件</b>选项也必须正确填写, 才能起作用！<br/><br/>";
+				statusmenu += "3️⃣https启用成功后, 后台面板就无法使用http地址进行访问了！<br/><br/>";
+				statusmenu += "4️⃣如果你为路由器配置了DDNS和https证书, openlist可以使用相同的证书, 即: <br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;证书Cert文件路径(绝对路径): <font color='#CC0066'>/etc/cert.pem</font><br/>";
+				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;证书Key文件路径(绝对路径): <font color='#CC0066'>/etc/key.pem</font><br/><br/>";
+				statusmenu += "5️⃣如果你使用ddnsto内网穿透服务, 请不要开启https选项！<br/><br/>";
+				_caption = "启用https: ";
 				return overlib(statusmenu, OFFSETX, -30, OFFSETY, 10, RIGHT, STICKY, WIDTH, 'width', CAPTION, _caption, CLOSETITLE, '');
 			}
 
 			if (itemNum == 11) {
 				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;开启系统检测功能可以防止因对路由器性能理解不足而出现的各种异常情况"
-				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;如果关闭系统检测，请确保可以理解并能处理路由器出现的各种异常情况"
-				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;目前检测项目："
-				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;内存大小和虚拟内存挂载情况（物理内存低于1G，强制挂载虚拟内存）"
+				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;如果关闭系统检测, 请确保可以理解并能处理路由器出现的各种异常情况"
+				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;目前检测项目: "
+				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;内存大小和虚拟内存挂载情况（物理内存低于1G, 强制挂载虚拟内存）"
 				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;已开启插件检测并提示"
-				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;由于openlist对路由器资源占用较多，所以强烈建议为路由器配置1G及以上的虚拟内存，以保证openlist的稳定运行！"
+				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;由于openlist对路由器资源占用较多, 所以强烈建议为路由器配置1G及以上的虚拟内存, 以保证openlist的稳定运行！"
 				_caption = "关闭系统检测";
 			}
 
 			if (itemNum == 12) {
-				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;同时最多的连接数(并发)，默认为0即不限制"
+				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;同时最多的连接数(并发), 默认为0即不限制"
 				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;对于一般的设备比如n1推荐10或者20"
 				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;使用场景（例如打开图片模式会并发不是很好的设备就会崩溃）"
 				_caption = "最大并发连接数";
@@ -696,7 +670,7 @@
 
 			if (itemNum == 13) {
 				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;是否检查SSL证书"
-				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;开启后如使用的网站的证书出现问题（如未包含中级证书、证书过期、证书伪造等），将不能使用该服务"
+				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;开启后如使用的网站的证书出现问题（如未包含中级证书、证书过期、证书伪造等）, 将不能使用该服务"
 				statusmenu += "<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;关闭该选项请尽量在安全的网络环境下运行程序"
 				_caption = "是否检查SSL证书";
 			}
@@ -745,12 +719,12 @@
 				<td height="100">
 					<div id="loading_block_title" style="margin:10px auto;margin-left:10px;width:85%; font-size:12pt;">
 					</div>
-					<div id="loading_block_spilt" style="margin:10px 0 10px 5px;" class="loading_block_spilt">
+					<div id="loading_block_spilt" style="margin:10px 0 10px 30px;" class="loading_block_spilt">
 						<li>
-							<font color="#ffcc00">请等待日志显示完毕，并出现自动关闭按钮！</font>
+							<font color="#ffcc00">请等待日志显示完毕, 并出现自动关闭按钮！</font>
 						</li>
 						<li>
-							<font color="#ffcc00">在此期间请不要刷新本页面，不然可能导致问题！</font>
+							<font color="#ffcc00">在此期间请不要刷新本页面, 不然可能导致问题！</font>
 						</li>
 					</div>
 					<div
@@ -790,7 +764,6 @@
 		</table>
 	</div>
 	<iframe name="hidden_frame" id="hidden_frame" width="0" height="0" frameborder="0"></iframe>
-	<!--=============================================================================================================-->
 	<table class="content" align="center" cellpadding="0" cellspacing="0">
 		<tr>
 			<td width="17">&nbsp;</td>
@@ -820,14 +793,8 @@
 										<div style="margin: 10px 0 10px 5px;" class="splitLine"></div>
 										<div class="SimpleNote">
 											<a href="https://github.com/OpenListTeam/OpenList"
-												target="_blank"><em><u>OpenList</u></em></a>&nbsp;一个支持多种存储的文件列表程序，使用 Gin
-											和 Solidjs。
-											<span><a type="button"
-													href="https://github.com/everstu/Koolcenter_openlist/blob/master/Changelog.txt"
-													target="_blank" class="ks_btn"
-													style="margin-left:5px;">更新日志</a></span>
-											<span><a type="button" class="ks_btn" href="javascript:void(0);"
-													onclick="get_log(1)" style="margin-left:5px;">插件日志</a></span>
+												target="_blank"><em><u>OpenList</u></em></a>&nbsp;是一个支持多种存储的文件列表程序, 使用
+											Gin 和 Solidjs 开发
 										</div>
 										<div id="openlist_status_pannel">
 											<table width="100%" border="1" align="center" cellpadding="4"
@@ -842,6 +809,9 @@
 															class="hintstyle" href="javascript:void(0);">运行状态</a></th>
 													<td>
 														<span style="margin-left:4px" id="openlist_status"></span>
+														<div style="float: right;"><span><a type="button" class="ks_btn"
+																	href="javascript:void(0);" onclick="get_log(1)"
+																	style="margin-left:5px;">插件日志</a></span></div>
 													</td>
 												</tr>
 												<tr id="openlist_version_tr" style="display: none;">
@@ -850,6 +820,10 @@
 													<td>
 														<span style="margin-left:4px" id="openlist_binver"></span>
 														<span style="margin-left:4px" id="openlist_webver"></span>
+														<div style="float: right;"><span><a type="button"
+																	href="https://sourceforge.net/projects/rogsoft-openlist/files/v4.1.8"
+																	target="_blank" class="ks_btn"
+																	style="margin-left:5px;">更新日志</a></span></div>
 													</td>
 												</tr>
 												<tr id="openlist_info_tr" style="display: none;">
@@ -892,7 +866,6 @@
 															style="vertical-align:middle;">
 													</td>
 												</tr>
-												<!--<tr><th colspan="2"><em>基础设置</em></th></tr>-->
 												<tr id="dashboard">
 													<th><a onmouseover="mOver(this, 5)" onmouseout="mOut(this)"
 															class="hintstyle" href="javascript:void(0);">实时进程守护</a></th>
@@ -910,13 +883,6 @@
 															style="vertical-align:middle;">
 													</td>
 												</tr>
-												<!--<tr>
-													<th><a onmouseover="mOver(this, 13)" onmouseout="mOut(this)" class="hintstyle" href="javascript:void(0);">检查SSL证书</a></th>
-													<td>
-														<input type="checkbox" id="openlist_check_ssl_cert" style="vertical-align:middle;">
-													</td>
-												</tr>
-												<tr><th colspan="2"><em>配置文件</em> -- <em style="color: gold;">【请查看<a href="https://www.oplist.org/zh/" target="_blank"><em>OpenList官方文档</em></a>，不懂勿动！！！】</th></tr>-->
 												<tr id="openlist_port_tr">
 													<th><a onmouseover="mOver(this, 7)" onmouseout="mOut(this)"
 															class="hintstyle" href="javascript:void(0);">面板http端口</a>
@@ -1016,12 +982,6 @@
 																style="vertical-align:middle;;margin-left:50px;">开放公网端口</span>
 													</td>
 												</tr>
-												<!-- <tr id="al_disable_http">
-													<th><a onmouseover="mOver(this, 10)" onmouseout="mOut(this)" class="hintstyle" href="javascript:void(0);">禁用http服务</a></th>
-													<td>
-														<input type="checkbox" id="openlist_disable_http" onchange="show_hide_element();" style="vertical-align:middle;" />
-													</td>
-												</tr> -->
 												<tr id="al_force_https">
 													<th><a onmouseover="mOver(this, 10)" onmouseout="mOut(this)"
 															class="hintstyle" href="javascript:void(0);">强制跳转https</a>
@@ -1061,14 +1021,14 @@
 										</div>
 										<div style="margin: 10px 0 10px 5px;" class="splitLine"></div>
 										<div style="margin:10px 0 0 20px">
-											<li>由于openlist需要路由器较好性能，本插件仅支持hnd平台，AX32机型请慎重使用！</li>
-											<li>建议挂载U盘并配合usb2jffs和虚拟内存插件一起食用，口感更佳，否则可能会出现莫名的问题。</li>
-											<li>如有不懂，特别是openlist配置文件的填写，请查看OpenList官方文档<a href="https://www.oplist.org"
-													target="_blank"><em>点这里看文档</em></a></li>
-											<li>插件使用有任何问题请加入<a href="https://t.me/xbchat"
-													target="_blank"><em><u>koolcenter TG群</u></em></a>或<a
+											<li>由于 openlist 需要路由器较好性能, 本插件仅支持 hnd 平台, AX32 机型请慎重使用！</li>
+											<li>建议挂载U盘并配合 usb2jffs 和虚拟内存插件一起食用, 口感更佳, 否则可能会出现莫名的问题</li>
+											<li>如有不懂, 特别是 openlist 配置文件的填写, 请查看 <a href="https://www.oplist.org"
+													target="_blank"><em>OpenList 官方文档</em></a></li>
+											<li>插件使用有任何问题请加入 <a href="https://t.me/xbchat"
+													target="_blank"><em><u>koolcenter TG群</u></em></a> 或 <a
 													href="https://t.me/meilinchajian" target="_blank"><em><u>Mc Chat
-															TG群</u></em></a>联系 @fiswonder<br></li>
+															TG群</u></em></a> 联系 @fiswonder<br></li>
 										</div>
 									</td>
 								</tr>

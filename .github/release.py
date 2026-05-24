@@ -24,13 +24,13 @@ def create_github_release(
         },
     )
     if response.status_code != 201:
-        raise ConnectionError(f"{response.status_code}: {response.json()}")
+        response.raise_for_status()
     # Get upload URL
-    release = response.json()
-    upload_url = release["upload_url"].split("{")[0]
+    upl_url: str = response.json()["upload_url"]
+    upload_url = upl_url.split("{")[0]
     fname = os.path.basename(fpath)
     with open(fpath, "rb") as binary_file:
-        upl_response = requests.post(
+        response = requests.post(
             f"{upload_url}?name={fname}",
             headers={
                 "Authorization": f"token {token}",
@@ -39,10 +39,10 @@ def create_github_release(
             data=binary_file,
         )
 
-    if upl_response.status_code == 201:
+    if response.status_code == 201:
         print(f"Upload '{fname}' success!")
     else:
-        print(f"Failed to upload {fname}: {upl_response.text}")
+        response.raise_for_status()
 
 
 if __name__ == "__main__":

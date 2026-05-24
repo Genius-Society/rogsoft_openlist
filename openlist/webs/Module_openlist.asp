@@ -54,13 +54,11 @@
 			width: 100%;
 			height: 100%;
 			z-index: 99;
-			/*background-color: #444F53;*/
 			filter: alpha(opacity=90);
 			/*IE5、IE5.5、IE6、IE7*/
 			background-repeat: repeat;
 			visibility: hidden;
 			overflow: hidden;
-			/*background: url(/images/New_ui/login_bg.png);*/
 			background: rgba(68, 79, 83, 0.85) none repeat scroll 0 0 !important;
 			background-position: 0 0;
 			background-size: cover;
@@ -70,7 +68,6 @@
 		.FormTitle em {
 			color: #00ffe4;
 			font-style: normal;
-			/*font-weight:bold;*/
 		}
 
 		.FormTable th {
@@ -163,6 +160,7 @@
 					}
 
 					webUiHref = window.location.protocol + "//" + hostname;
+
 				} else {
 					webUiHref = protocol + "//" + window.location.hostname;
 					if (port) {
@@ -170,42 +168,26 @@
 					}
 				}
 
-				if (!dbus["openlist_url_error"] && dbus["openlist_publicswitch"] == 1 && dbus["openlist_site_url"]) {
-					//暂时不判断是否未内网ip访问面板
-					//理论上内网IP访问面板需要用内网IP访问
-					//用外网域名会导致无法访问。
-					// 			if(! isInnerIPFn()){
+				if (!dbus["openlist_url_error"] && dbus["openlist_publicswitch"] == 1 && dbus["openlist_site_url"]) { // 暂时不判断是否未内网ip访问面板, 理论上内网IP访问面板需要用内网IP访问, 用外网域名会导致无法访问
 					webUiHref = dbus["openlist_site_url"];
-					// 			}
 				}
-
 
 				E("fileb").href = webUiHref;
 				E("fileb").innerHTML = "访问 OpenList 面板";
 			}
 		}
-
 		/*判断是否是内网IP*/
-		function isInnerIPFn() {
-			// 获取当前页面url
+		function isInnerIPFn() { // 获取当前页面url
 			var curPageUrl = window.location.href;
 			console.log('curPageUrl-0  ' + curPageUrl);
-
-			var reg1 = /(http|ftp|https|www):\/\//g;//去掉前缀
+			var reg1 = /(http|ftp|https|www):\/\//g; // 去掉前缀
 			curPageUrl = curPageUrl.replace(reg1, '');
-			// console.log('curPageUrl-1  '+curPageUrl);
-
-			var reg2 = /\:+/g;//替换冒号为一点
+			var reg2 = /\:+/g; // 替换冒号为一点
 			curPageUrl = curPageUrl.replace(reg2, '.');
-			// console.log('curPageUrl-2  '+curPageUrl);
-
-			curPageUrl = curPageUrl.split('.');//通过一点来划分数组
+			curPageUrl = curPageUrl.split('.'); // 通过一点来划分数组
 			console.log(curPageUrl);
-
-
 			var ipAddress = curPageUrl[0] + '.' + curPageUrl[1] + '.' + curPageUrl[2] + '.' + curPageUrl[3];
-
-			var isInnerIp = false;//默认给定IP不是内网IP
+			var isInnerIp = false; // 默认给定IP不是内网IP
 			var ipNum = getIpNum(ipAddress);
 			/**
 			 * 私有IP: A类  10.0.0.0    -10.255.255.255
@@ -222,7 +204,6 @@
 			var dBegin = getIpNum("127.0.0.0");
 			var dEnd = getIpNum("127.255.255.255");
 			isInnerIp = isInner(ipNum, aBegin, aEnd) || isInner(ipNum, bBegin, bEnd) || isInner(ipNum, cBegin, cEnd) || isInner(ipNum, dBegin, dEnd);
-			//     console.log('是否是内网:'+isInnerIp);
 			return isInnerIp;
 		}
 
@@ -254,7 +235,6 @@
 			if (dbus["openlist_version"]) {
 				E("openlist_version").innerHTML = " - " + dbus["openlist_version"];
 			}
-
 			if (dbus["openlist_binver"]) {
 				E("openlist_binver").innerHTML = "当前版本: <em>" + dbus["openlist_binver"] + "</em>";
 			} else {
@@ -280,7 +260,6 @@
 				E("openlist_apply_btn_2").style.display = "none";
 				E("openlist_apply_btn_3").style.display = "none";
 			}
-
 			// URL ERROR
 			if (dbus["openlist_url_error"] == "1") {
 				$("#openlist_site_url").css({
@@ -289,7 +268,6 @@
 				});
 				E("warn_url").innerHTML = "【值错误】";
 			}
-
 			// CDN ERROR
 			if (dbus["openlist_cdn_error"] == "1") {
 				$("#openlist_cdn").css({
@@ -298,7 +276,6 @@
 				});
 				E("warn_cdn").innerHTML = "【值错误】";
 			}
-
 			// CERT/KEY ERROR
 			if (dbus["openlist_cert_error"] == "1") {
 				$("#openlist_cert_file").css({
@@ -320,7 +297,6 @@
 			} else if (dbus["openlist_cert_error"] != "1" && dbus["openlist_key_error"] == "1") {
 				E("warn_cert").innerHTML = "【下方证书私钥Key文件配置错误, 无法启用https! 详见插件日志】";
 			}
-
 			// SHOW HIDE
 			if (E("openlist_publicswitch").checked == false) {
 				E("al_https").style.display = "none";
@@ -341,21 +317,14 @@
 					E("al_cert").style.display = "none";
 					E("al_key").style.display = "none";
 					E("al_https_port").style.display = "none";
-					// 			E("al_disable_http").style.display = "none";
 					E("al_force_https").style.display = "none";
 					E("al_open_https_port").style.display = "none";
 				} else {
 					E("al_cert").style.display = "";
 					E("al_key").style.display = "";
 					E("al_https_port").style.display = "";
-					// 			E("al_disable_http").style.display = "";
 					E("al_force_https").style.display = "";
 					E("al_open_https_port").style.display = "";
-					/* if(E("openlist_disable_http").checked == false){
-						E("al_force_https").style.display = "";
-					}else{
-						E("al_force_https").style.display = "none";
-					} */
 				}
 			}
 		}
@@ -802,7 +771,6 @@
 		</table>
 	</div>
 	<iframe name="hidden_frame" id="hidden_frame" width="0" height="0" frameborder="0"></iframe>
-	<!--=============================================================================================================-->
 	<table class="content" align="center" cellpadding="0" cellspacing="0">
 		<tr>
 			<td width="17">&nbsp;</td>
@@ -910,7 +878,6 @@
 															style="vertical-align:middle;">
 													</td>
 												</tr>
-												<!--<tr><th colspan="2"><em>基础设置</em></th></tr>-->
 												<tr id="dashboard">
 													<th><a onmouseover="mOver(this, 5)" onmouseout="mOut(this)"
 															class="hintstyle" href="javascript:void(0);">实时进程守护</a></th>
@@ -928,13 +895,6 @@
 															style="vertical-align:middle;">
 													</td>
 												</tr>
-												<!--<tr>
-													<th><a onmouseover="mOver(this, 13)" onmouseout="mOut(this)" class="hintstyle" href="javascript:void(0);">检查SSL证书</a></th>
-													<td>
-														<input type="checkbox" id="openlist_check_ssl_cert" style="vertical-align:middle;">
-													</td>
-												</tr>
-												<tr><th colspan="2"><em>配置文件</em> -- <em style="color: gold;">【请查看<a href="https://www.oplist.org/zh/" target="_blank"><em>OpenList官方文档</em></a>, 不懂勿动! ! ! 】</th></tr>-->
 												<tr id="openlist_port_tr">
 													<th><a onmouseover="mOver(this, 7)" onmouseout="mOut(this)"
 															class="hintstyle" href="javascript:void(0);">面板http端口</a>

@@ -573,13 +573,7 @@ start() {
 
   # 6. gen version info everytime
   /koolshare/bin/openlist version >${OpenListBaseDir}/openlist.version
-  local BIN_VER=$(cat ${OpenListBaseDir}/openlist.version | grep -Ew "^Version" | awk '{print $2}')
-  local WEB_VER=$(cat ${OpenListBaseDir}/openlist.version | grep -Ew "^WebVersion" | awk '{print $2}')
-  if [ -n "${BIN_VER}" -a -n "${WEB_VER}" ]; then
-    dbus set openlist_binver=${BIN_VER}
-    dbus set openlist_webver=${WEB_VER}
-  fi
-
+  
   # 7. start process
   start_process
 

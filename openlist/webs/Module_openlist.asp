@@ -573,10 +573,10 @@
 				_caption = "运行状态";
 			}
 			if (itemNum == 2) {
-				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;1. 此处显示openlist二进制程序的版本号及其内置的openlist面板版本号。<br/><br/>"
+				statusmenu = "&nbsp;&nbsp;&nbsp;&nbsp;1. 此处显示当前openlist插件版本号及云端最新版本号, 其中插件版本号与openlist二进制程序版本号同号。<br/><br/>"
 				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;2. openlist二进制程序下载自openlist的github项目release页面的openlist-linux-arm64版本。<br/><br/>"
 				statusmenu += "&nbsp;&nbsp;&nbsp;&nbsp;3.目前只支持hnd机型中的armv8机型, 比如cpu型号为BCM4906、BCM4908、BCM4912等armv8机型。<br/><br/>"
-				_caption = "运行状态";
+				_caption = "版本信息";
 			}
 			if (itemNum == 3) {
 				statusmenu = "! ! ! 请注意: v3.25版本后不允许查看密码, 只能重新生成!<br/><br/>"

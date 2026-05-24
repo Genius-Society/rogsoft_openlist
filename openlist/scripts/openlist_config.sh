@@ -738,8 +738,8 @@ check_ver() {
 }
 
 update() {
-  local local_ver = $(dbus get openlist_version)
-  local latest_ver = $(curl -s https://raw.githubusercontent.com/Genius-Society/rogsoft_openlist/refs/heads/main/openlist/version)
+  local local_ver=$(dbus get openlist_version)
+  local latest_ver=$(curl -s https://raw.githubusercontent.com/Genius-Society/rogsoft_openlist/refs/heads/main/openlist/version)
   if [ "${local_ver}" == "${latest_ver}" ]; then
     echo_date "OpenList 已是最新版本, 无需更新!"
   else

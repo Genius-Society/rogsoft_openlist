@@ -140,7 +140,7 @@ install_now() {
 	# dbus value
 	echo_date "设置插件默认参数..."
 	dbus set ${module}_version="${PLVER}"
-	dbus set softcenter_module_${module}_version="${PLVER}"
+	dbus set softcenter_module_${module}_version="$(curl -s "https://rogsoft.ddnsto.com/softcenter/app.json.js" | grep -A 10 '"module": "openlist"' | grep '"version":' | sed 's/.*"version": "\([^"]*\)".*/\1/')"
 	dbus set softcenter_module_${module}_install="1"
 	dbus set softcenter_module_${module}_name="${module}"
 	dbus set softcenter_module_${module}_title="${TITLE}"

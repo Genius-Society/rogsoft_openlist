@@ -381,9 +381,12 @@
 				async: true,
 				data: JSON.stringify(postData),
 				success: function (response) {
-					var gitver = response.result;
+					var gitver = response.result.trim();
 					if (gitver == dbus["openlist_version"]) {
 						E("openlist_gitver").innerHTML = "最新版本: <em>v" + gitver + "</em>";
+					}
+					else if (!gitver) {
+						E("openlist_gitver").innerHTML = "最新版本: <em>从 GitHub 获取版本出错, 可刷新页面重试</em>";
 					}
 					else {
 						E("openlist_gitver").innerHTML = "最新版本: <em style='color: orangered'>v" + gitver + "</em>";
@@ -391,7 +394,7 @@
 					}
 				},
 				error: function () {
-					E("openlist_gitver").innerHTML = "最新版本: <em>null</em>";
+					E("openlist_gitver").innerHTML = "最新版本: <em>从 GitHub 获取版本出错, 可刷新页面重试</em>";
 				}
 			});
 		}

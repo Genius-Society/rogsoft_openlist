@@ -65,7 +65,7 @@ def create_github_release(
         json={
             "tag_name": tag,
             "name": f"v{tag}",
-            "body": f"Update {repo.split('_')[-1].capitalize()} binary to version {tag}",
+            "body": f"Upd {repo.split('_')[-1].capitalize()} bin to ver {tag}",
             "draft": False,
             "prerelease": False,
         },

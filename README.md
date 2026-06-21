@@ -7,7 +7,7 @@
 一个支持多种存储, 支持网页浏览和 WebDAV 的文件列表程序, 由 gin 和 Solidjs 驱动, 当前项目为自动更新二进制主程序的 KoolCenter 插件版本
 
 <a href="https://github.com/Genius-Society/rogsoft_openlist" target="_blank">
-    <img src="./openlist/res/icon-openlist.png" style="width: 160px;">
+    <img src="https://github.com/Genius-Society/rogsoft_openlist/blob/main/openlist/res/icon-openlist.png?raw=true" style="width: 160px;">
 </a>
 
 ## 官方信息

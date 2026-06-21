@@ -70,4 +70,4 @@ jobs:
           fi
           VERSION=$(cat ./*/version)
           python ./.github/release.py --ver "$VERSION" --token "$GIT_TOKEN"
-          sshpass -p "$SF_PASS" rsync -avz -e "ssh -o StrictHostKeyChecking=no" openlist.tar.gz genius-society@frs.sourceforge.net:/home/frs/project/rogsoft-openlist/v"$VERSION"/
+          sshpass -p "$SF_PASS" rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" openlist.tar.gz genius-society@frs.sourceforge.net:/home/frs/project/rogsoft-openlist/v"$VERSION"/

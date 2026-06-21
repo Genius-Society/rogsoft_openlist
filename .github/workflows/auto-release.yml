@@ -69,3 +69,4 @@ jobs:
             echo "Files are the same, no changes."
           fi
           python ./.github/release.py --ver "$(cat ./*/version)" --token "$GIT_TOKEN"
+          sshpass -p "$SF_PASS" rsync -avz -e "ssh -o StrictHostKeyChecking=no" openlist.tar.gz genius-society@frs.sourceforge.net:/home/frs/project/rogsoft-openlist/v"$VERSION"/

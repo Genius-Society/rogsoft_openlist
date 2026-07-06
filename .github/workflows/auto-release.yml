@@ -64,7 +64,7 @@ jobs:
       # Step 3: 发布至 GitHub
       - name: Update Release
         env:
-          GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
+          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
           SF_PASS: ${{ secrets.SF_PASS }}
         run: |
           python ./build.py

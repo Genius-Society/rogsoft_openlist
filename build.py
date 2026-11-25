@@ -11,7 +11,7 @@ from pathlib import Path
 
 def latest_release(repo):
     url = f"https://api.github.com/repos/{repo}/releases/latest"
-    headers = {}
+    headers = {"Authorization": f"token {os.getenv('GIT_TOKEN')}"}
     req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req) as resp:
         data = json.load(resp)

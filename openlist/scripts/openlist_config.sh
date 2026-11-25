@@ -718,28 +718,28 @@ check_status() {
 }
 
 check_ver() {
-	http_response $(curl -s https://raw.githubusercontent.com/Genius-Society/rogsoft_openlist/refs/heads/main/openlist/version)
+	http_response $(curl -fsSL -A 'Mozilla/5.0' 'https://api.github.com/repos/Genius-Society/rogsoft_openlist/releases/latest' | sed -n 's/.*"tag_name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | sed 's/^v//')
 	dbus set softcenter_module_openlist_version="$(curl -s "https://rogsoft.ddnsto.com/softcenter/app.json.js" | grep -A 10 '"module": "openlist"' | grep '"version":' | sed 's/.*"version": "\([^"]*\)".*/\1/')"
 }
 
 update() {
 	local local_ver=$(dbus get openlist_version)
-	local latest_ver=$(curl -s https://raw.githubusercontent.com/Genius-Society/rogsoft_openlist/refs/heads/main/openlist/version)
+	local latest_ver=$(curl -fsSL -A 'Mozilla/5.0' 'https://api.github.com/repos/Genius-Society/rogsoft_openlist/releases/latest' | sed -n 's/.*"tag_name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | sed 's/^v//')
 	if [ "${local_ver}" == "${latest_ver}" ]; then
 		echo_date "OpenList 已是最新版本, 无需更新!"
 	else
 		echo_date "更新 OpenList 插件中..."
-		local port=0
+		local proxyPort=0
 		local status=0
 		if [ "$(dbus get ss_basic_enable)" = "1" ]; then
 			status=$(curl -x http://127.0.0.1:23456 -s -o /dev/null -w "%{http_code}" https://github.com)
-			port=23456
+			proxyPort=23456
 		elif [ "$(dbus get merlinclash_enable)" = "1" ]; then
 			status=$(curl -x http://127.0.0.1:23457 -s -o /dev/null -w "%{http_code}" https://github.com)
-			port=23457
+			proxyPort=23457
 		fi
 		if [ "${status}" == "200" ]; then
-			wget --no-hsts -c -t 0 -T 30 -e use_proxy=yes -e https_proxy=http://127.0.0.1:${port} -O /tmp/upload/openlist.tar.gz "https://github.com/Genius-Society/rogsoft_openlist/releases/download/${latest_ver}/openlist.tar.gz" 2>&1
+			wget --no-hsts -c -t 0 -T 30 -e use_proxy=yes -e https_proxy=http://127.0.0.1:${proxyPort} -O /tmp/upload/openlist.tar.gz "https://github.com/Genius-Society/rogsoft_openlist/releases/download/${latest_ver}/openlist.tar.gz" 2>&1
 		else
 			wget --no-hsts -c -t 0 -T 30 -O /tmp/upload/openlist.tar.gz "https://github.com/Genius-Society/rogsoft_openlist/releases/download/${latest_ver}/openlist.tar.gz" 2>&1
 		fi

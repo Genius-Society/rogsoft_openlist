@@ -729,6 +729,10 @@ update() {
 	local status=0
 	local proxyPort=0
 	local latest_ver=$(curl -fsSL -A 'Mozilla/5.0' 'https://api.github.com/repos/Genius-Society/rogsoft_openlist/releases/latest' | sed -n 's/.*"tag_name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | sed 's/^v//')
+	if [ -z "$latest_ver" ]; then
+		echo_date "获取最新版本失败，取消更新!"
+		return 1
+	fi
 	if [ "$(dbus get ss_basic_enable)" == "1" ]; then
 		proxyPort=23456
 		status=$(curl -x http://127.0.0.1:${proxyPort} -s -o /dev/null -w "%{http_code}" https://github.com)

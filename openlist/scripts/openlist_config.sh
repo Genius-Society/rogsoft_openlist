@@ -737,7 +737,7 @@ update() {
 		proxyPort=23456
 		status=$(curl -x http://127.0.0.1:${proxyPort} -s -o /dev/null -w "%{http_code}" https://github.com)
 	elif [ "$(dbus get merlinclash_enable)" == "1" ]; then
-		proxyPort=23457
+		proxyPort=3333
 		status=$(curl -x http://127.0.0.1:${proxyPort} -s -o /dev/null -w "%{http_code}" https://github.com)
 	fi
 	if [ "${status}" == "200" ]; then

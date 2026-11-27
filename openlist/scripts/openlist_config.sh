@@ -728,6 +728,7 @@ update() {
 	echo_date "更新 OpenList 插件中..."
 	local status=0
 	local proxyPort=0
+	local latest_ver=$(curl -fsSL -A 'Mozilla/5.0' 'https://api.github.com/repos/Genius-Society/rogsoft_openlist/releases/latest' | sed -n 's/.*"tag_name"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | sed 's/^v//')
 	if [ "$(dbus get ss_basic_enable)" == "1" ]; then
 		proxyPort=23456
 		status=$(curl -x http://127.0.0.1:${proxyPort} -s -o /dev/null -w "%{http_code}" https://github.com)

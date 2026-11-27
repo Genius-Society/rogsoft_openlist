@@ -139,6 +139,7 @@ install_now() {
 
 	# dbus value
 	echo_date "设置插件默认参数..."
+	dbus set ${module}_md5="$(md5sum /tmp/${module}.tar.gz | awk '{print $1}')"
 	dbus set ${module}_version="${PLVER}"
 	dbus set softcenter_module_${module}_version="$(curl -s "https://rogsoft.ddnsto.com/softcenter/app.json.js" | grep -A 10 '"module": "openlist"' | grep '"version":' | sed 's/.*"version": "\([^"]*\)".*/\1/')"
 	dbus set softcenter_module_${module}_install="1"
@@ -216,7 +217,7 @@ migrateDbus() {
 		while IFS= read -r line; do
 			# 替换 alist_ 为 openlist_
 			new_line=$(echo "$line" | sed 's/alist_/openlist_/')
-			dbus set "$new_line" 
+			dbus set "$new_line"
 		done
 }
 

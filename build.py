@@ -10,11 +10,11 @@ from pathlib import Path
 
 
 def latest_release(repo):
-    url = f"https://api.github.com/repos/{repo}/releases/latest"
-    headers = {"Authorization": f"token {os.getenv('GIT_TOKEN')}"}
-    req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req) as resp:
-        data = json.load(resp)
+    response = urllib.request.Request(
+        f"https://api.github.com/repos/{repo}/releases/latest"
+    )
+    with urllib.request.urlopen(response) as json_resp:
+        data: dict = json.load(json_resp)
 
     ver = data["tag_name"]
     return ver[1:], f"https://github.com/{repo}/releases/download/{ver}"

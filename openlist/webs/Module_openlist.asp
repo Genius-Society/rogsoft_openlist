@@ -381,19 +381,23 @@
 				async: true,
 				data: JSON.stringify(postData),
 				success: function (response) {
-					var gitver = response.result.trim();
-					if (gitver == dbus["openlist_version"]) {
-						E("openlist_gitver").innerHTML = "最新版本: <em>v" + gitver + "</em>";
-					}
-					else if (!gitver) {
-						E("openlist_gitver").innerHTML = "最新版本: <em>从 GitHub 获取版本出错, 可刷新页面重试</em>";
+					var values = response.result.split("|");
+					var gitver = values[0] || "";
+					var gitmd5 = values[1] || "";
+					if (gitver != "") {
+						if (gitver == dbus["openlist_version"]) {
+							E("openlist_gitver").innerHTML = "最新版本: <em>v" + gitver + "</em>";
+						}
+						else {
+							E("openlist_gitver").innerHTML = "最新版本: <em style='color: orangered'>v" + gitver + "</em>";
+						}
 					}
 					else {
-						E("openlist_gitver").innerHTML = "最新版本: <em style='color: orangered'>v" + gitver + "</em>";
-						$("#upd").show();
+						E("openlist_gitver").innerHTML = "最新版本: <em>从 GitHub 获取版本出错, 可刷新页面重试</em>";
 					}
+					if (gitmd5 != dbus["openlist_md5"]) $("#upd").show();
 				},
-				error: function () {
+				error: function (xhr, textStatus, errorThrown) {
 					E("openlist_gitver").innerHTML = "最新版本: <em>从 GitHub 获取版本出错, 可刷新页面重试</em>";
 				}
 			});
